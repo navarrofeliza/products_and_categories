@@ -1,0 +1,34 @@
+@model Association
+
+<div class="text-center">
+    <h1><a href="/">Products</a> | <a href="/Category">Categories</a></h1>
+    <h2>@ViewBag.this_product.Name</h2>
+    <table class="table col-sm-- mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <h3><u>Categories:</u></h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Category category in @ViewBag.UsedCategories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form class="form-group" asp-action="UpdateProduct" asp-controller="Home" method="post">
+        <div class="form-group">
+            <select asp-for="CategoryId" class="form-control my-5">
+                @foreach (var item in ViewBag.UnusedCategories)
+                {
+                    <option value="@item.CategoryId">@item.Name</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
